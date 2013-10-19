@@ -10,7 +10,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem 'therubyracer', platforms: :ruby
+gem 'haml-rails'
 
+gem 'less-rails'
 gem 'jquery-rails'
 
 gem 'turbolinks'
