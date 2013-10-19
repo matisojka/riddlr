@@ -1,0 +1,28 @@
+%p.pull-right.visible-xs
+  %button.btn.btn-primary.btn-xs{"data-toggle" => "offcanvas", type: "button"} Toggle nav
+.jumbotron
+  %h1 Hello there chaps!
+  %p Here you can create and solve some amazing Ruby Quizzes
+
+.row
+  .col-6.col-sm-6.col-lg-4
+    %h2 Heading
+    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    %p
+      %a.btn.btn-default{href: "#"} View details »
+  / /span
+  .col-6.col-sm-6.col-lg-4
+    %h2 Heading
+    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    %p
+      %a.btn.btn-default{href: "#"} View details »
+  / /span
+  .col-6.col-sm-6.col-lg-4
+    %h2 Heading
+    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    %p
+      %a.btn.btn-default{href: "#"} View details »
+  / /span
+
+/ /row
+

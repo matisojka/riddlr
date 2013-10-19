@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html(lang="en" ng-app='riddlr')
   %head
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
@@ -22,7 +22,7 @@
     .container
 
       .row.row-offcanvas.row-offcanvas-right
-        .col-xs-12.col-sm-9
+        .col-xs-12.col-sm-9(ng-view=true)
           = yield
         #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{role: "navigation"}
           .well.sidebar-nav

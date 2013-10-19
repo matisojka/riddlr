@@ -17,7 +17,9 @@ gem 'less-rails-bootstrap'
 
 gem 'jquery-rails'
 
-gem 'turbolinks'
+gem 'angularjs-rails'
+gem 'haml_coffee_assets'
+gem 'execjs'
 
 group :development do
   gem 'quiet_assets', github: 'evrone/quiet_assets'
