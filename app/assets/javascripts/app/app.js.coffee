@@ -7,6 +7,7 @@ Riddlr = angular.module 'riddlr', [
     'ngResource'
     'app.controllers'
     'app.directives'
+    'ui.ace'
   ]
 
 angular.module 'app.controllers', []

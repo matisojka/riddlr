@@ -37,18 +37,12 @@
 
       / Textarea
       .form-group
-        %label{for: "priv_environment"} Private environment
-        %textarea#private_environment.form-control{name: "private_environment", rows: 5}
-          :preserve
-            This code won't be visible to the solver of your quiz. Instantiate here methods that the user can use.
-            Remember to provide the user with a description of the provided methods.
+        %label{for: "private_environment"} Private environment
+        %div#private_environment(ui-ace='editor_opts')
 
       .form-group
         %label{for: "public_environment"} Public environment
-        %textarea#public_environment.form-control{name: "public_environment", rows: 5}
-          :preserve
-            The solver of the quiz will use this environment to solve the quiz.
-            Provide some placeholder methods or examples.
+        %div#public_environment(ui-ace='editor_opts')
 
       .form-group
         %label{for: "expectations"} Expectations
@@ -58,8 +52,7 @@
       / Textarea
       .form-group
         %label{for: "solution"} Valid solution
-        %textarea#solution.form-control{name: "solution", rows: 5}
-          Provide a valid solution in order to ensure that this quiz has at least one solution.
+        %div#solution(ui-ace='editor_opts')
 
       %button.btn.btn-lg.btn-primary.pull-right{type: 'submit'}
         Check

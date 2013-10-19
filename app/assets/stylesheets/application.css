@@ -10,4 +10,6 @@
  *
  *= require_self
  *= require custom_bootstrap/custom_bootstrap
+ *= require custom
  */
+
