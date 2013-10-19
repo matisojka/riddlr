@@ -1,4 +1,6 @@
-angular.module('app.controllers').controller 'HomepageCtrl', [
+angular.module('app.controllers')
+
+.controller 'HomepageCtrl', [
   '$scope'
 ($scope) ->
 

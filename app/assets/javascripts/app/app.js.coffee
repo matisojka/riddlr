@@ -1,14 +1,16 @@
 #= require_self
-# require_tree ./directives/
+#= require_tree ./directives/
 #= require_tree ./controllers/
 #= require_tree ./resources/
 
 Riddlr = angular.module 'riddlr', [
     'ngResource'
     'app.controllers'
+    'app.directives'
   ]
 
 angular.module 'app.controllers', []
+angular.module 'app.directives', []
 
 Riddlr.config [
   '$httpProvider'
@@ -21,7 +23,7 @@ Riddlr.config [
   token = $("meta[name='csrf-token']").attr("content")
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = token
 
-  $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode(true).hashPrefix('!')
 
   $routeProvider.
     when('/quizzes/:id'

@@ -1,4 +1,6 @@
-angular.module('app.controllers').controller 'QuizzesCtrl', [
+angular.module('app.controllers')
+
+.controller 'QuizzesCtrl', [
   '$scope'
 ($scope) ->
 

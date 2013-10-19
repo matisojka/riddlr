@@ -6,23 +6,119 @@
 
 .row
   .col-6.col-sm-6.col-lg-4
-    %h2 Heading
+    %h2 Create
+    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    %p
+      %a.btn.btn-default(scroll-to=true href='#quiz-new') Create a quiz »
+  / /span
+  .col-6.col-sm-6.col-lg-4
+    %h2 Share
     %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
     %p
       %a.btn.btn-default{href: "#"} View details »
   / /span
   .col-6.col-sm-6.col-lg-4
-    %h2 Heading
-    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-    %p
-      %a.btn.btn-default{href: "#"} View details »
-  / /span
-  .col-6.col-sm-6.col-lg-4
-    %h2 Heading
+    %h2 Solve
     %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
     %p
       %a.btn.btn-default{href: "#"} View details »
   / /span
 
 / /row
+
+#quiz-new.row
+
+  %form(role='form')
+    %fieldset
+      / Form Name
+      %legend
+        .jumbotron
+          %h2 New quiz
+
+      / Textarea
+      .form-group
+        %label{for: "priv_environment"} Private environment
+        %textarea#private_environment.form-control{name: "private_environment", rows: 5}
+          :preserve
+            This code won't be visible to the solver of your quiz. Instantiate here methods that the user can use.
+            Remember to provide the user with a description of the provided methods.
+
+      .form-group
+        %label{for: "public_environment"} Public environment
+        %textarea#public_environment.form-control{name: "public_environment", rows: 5}
+          :preserve
+            The solver of the quiz will use this environment to solve the quiz.
+            Provide some placeholder methods or examples.
+
+      .form-group
+        %label{for: "expectations"} Expectations
+        %input#expectations.form-control{name: "expectations", placeholder: "expectations", required: "", type: "text"}/
+        %p.help-block Add some expectations
+
+      / Textarea
+      .form-group
+        %label{for: "solution"} Valid solution
+        %textarea#solution.form-control{name: "solution", rows: 5}
+          Provide a valid solution in order to ensure that this quiz has at least one solution.
+
+      %button.btn.btn-lg.btn-primary.pull-right{type: 'submit'}
+        Check
+      .clearfix
+
+      / Text input
+      .form-group
+        .row
+          .col-lg-6
+            %label{for: "title"} Title
+            %input#title.form-control{name: "title", placeholder: "Enumerable #map", required: true, type: "text"}/
+            %p.help-block Choose a short, descriptive title
+
+          .col-lg-6
+            %label{for: "goal"} Goal
+            %input#goal.form-control{name: "goal", placeholder: "Multiply all elements by 2", required: true, type: "text"}/
+            %p.help-block A short, concise summary of the goal
+
+      / Textarea
+      .form-group
+        %label{for: "description"} Description
+        %textarea#description.form-control{name: "description", rows: 5}
+          :preserve
+            Add a full description of your quiz.
+            You can add an introduction, explain a ruby method or just explain what the environment is and what you expect.
+            You can use markdown in here.
+
+
+      / Text input
+      .form-group
+        %label{for: "hints"} Hints
+        %input#hints.form-control{name: "hints", placeholder: "Try to multiply every element by 2", type: "text"}/
+        %p.help-block hints
+
+      / Select Basic
+      .form-group
+        .row
+          .col-lg-4
+            %label{for: "difficulty"} Difficulty
+            %select#difficulty.form-control{name: "difficulty"}
+              %option Easy
+              %option Intermediate
+              %option Difficult
+              %option Master
+
+          .col-lg-4
+            %label{for: "author"} Author
+            %input#author.form-control{name: "author", placeholder: "John Doe", type: "text"}/
+            %p.help-block Add your name if you want
+
+          .col-lg-4
+            %label{for: "private"} Private?
+            .checkbox
+              %input#private.checkbox{name: "private", type: "checkbox", value: "Yes"}/
+                Yes (only accessible through a link)
+
+      / Text input
+      .form-group
+        %label{for: "tags"} Tags
+        %input#tags.form-control{name: "tags", placeholder: "enumerable, map", type: "text"}/
+        %p.help-block Add some tags
 
