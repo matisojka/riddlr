@@ -13,6 +13,10 @@ class EvalBackend
       response['passes']
     end
 
+    def total_time
+      response['total_time']
+    end
+
     def timeout?
       @timeout
     end

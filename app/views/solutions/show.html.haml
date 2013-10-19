@@ -1,0 +1,55 @@
+%h1 Looks like you made it!
+%p
+  Congratulations you solved quiz
+  %strong= @solution.quiz.title+"!"
+  If you had fun recommend it to your friends:
+
+.alert.alert-info
+  = link_to quiz_url(@solution.quiz), quiz_url(@solution.quiz)
+
+%p
+  Your solution took us
+  %strong #{convert_to_ms(@solution.time)}
+  ms of computing power and
+  %strong #{@solution.code_length}
+  charakters of disc space!
+
+.code
+  = render_code(@solution.code)
+
+%h2 See how the others did
+
+.row
+  .col-lg-6
+    %h3 The fastest are ...
+
+    %table.table.table-striped
+      %tr
+        %th
+          Author
+        %th
+          Runtime
+      - Solution.fastest_for(@solution.quiz).each do |solution|
+        %tr{ class: solution.id == @solution.id && 'warning' }
+          %td
+            = link_to "Anonymous", solution_path(solution)
+          %td
+            #{convert_to_ms(solution.time).to_s} ms
+
+  .col-lg-6
+    %h3 Spaces Savers
+
+    %table.table.table-striped
+      %tr
+        %th
+          Author
+        %th
+          Amount of Characters
+      - Solution.smallest_for(@solution.quiz).each do |solution|
+        %tr{ class: solution.id == @solution.id && 'warning' }
+          %td
+            = link_to "Anonymous", solution_path(solution)
+          %td
+            = solution.code_length
+
+

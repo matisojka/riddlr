@@ -6,6 +6,7 @@ Riddlr::Application.routes.draw do
   root 'homepage#show'
 
   resources :quizzes, only: %i(show)
+  resources :solutions, only: %i(show)
 
   namespace :api do
     namespace :v1 do

@@ -203,6 +203,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   capistrano (~> 2.15)
+  coderay
   coffee-rails (~> 4.0.0)
   execjs
   haml-rails

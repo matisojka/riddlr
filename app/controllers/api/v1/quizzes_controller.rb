@@ -38,7 +38,9 @@ module Api
             solution = Solution.create( quiz: quiz,
                           code: verification_params[:code],
                           passed: validator.response.passed?,
-                          expectations: validator.response.expectations)
+                          expectations: validator.response.expectations,
+                          time: validator.response.total_time,
+                          code_length: verification_params[:code].length)
 
             render json: solution
           else

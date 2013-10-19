@@ -23,6 +23,7 @@ module Riddlr
 
         result[:passes] = all_passed?(internal_results[:expectations])
         result[:expectations] = internal_results[:expectations]
+        result[:total_time] = internal_results[:total_time]
       rescue Sandbox::SandboxException => e
         if e.message.include?("Timeout::Error")
           result[:passes] = false
@@ -53,6 +54,7 @@ module Riddlr
       @sandbox.eval('require "rspec"')
       @sandbox.eval('include RSpec::Matchers')
       @sandbox.eval('require "timeout"')
+      @sandbox.eval('require "benchmark"')
       @sandbox.activate!
 
       @sandbox
@@ -62,7 +64,8 @@ module Riddlr
 
     def build_eval_string
       eval_string = ["Timeout.timeout(5) do ", "result = {}"]
-
+      eval_string << "bench_res = Benchmark.measure do"
+      eval_string << "return_value = nil"
       eval_string << "return_value = begin"
       eval_string << @code
       eval_string << "end"
@@ -83,6 +86,9 @@ module Riddlr
         eval_string << "result[:expectations] << { title: '#{title}', error: e.to_s, backtrace: e.backtrace, message: e.message }"
         eval_string << "end"
       end
+
+      eval_string << "end"
+      eval_string << "result[:total_time] = bench_res.total"
 
       eval_string << "result"
       eval_string << "end"
