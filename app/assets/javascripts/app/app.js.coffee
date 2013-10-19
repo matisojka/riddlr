@@ -7,11 +7,13 @@ Riddlr = angular.module 'riddlr', [
     'ngResource'
     'app.controllers'
     'app.directives'
+    'app.resources'
     'ui.ace'
   ]
 
 angular.module 'app.controllers', []
 angular.module 'app.directives', []
+angular.module 'app.resources', ['ngResource']
 
 Riddlr.config [
   '$httpProvider'

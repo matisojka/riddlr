@@ -2,7 +2,8 @@ angular.module('app.controllers')
 
 .controller 'HomepageCtrl', [
   '$scope'
-($scope) ->
+  'Quiz'
+($scope, Quiz) ->
 
   $scope.editor_opts =
     useWrapMode : true
