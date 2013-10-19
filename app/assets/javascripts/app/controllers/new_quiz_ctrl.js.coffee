@@ -2,7 +2,9 @@ angular.module('app.controllers')
 
 .controller 'NewQuizCtrl', [
   '$scope'
-($scope) ->
+  'Verification'
+
+($scope, Verification) ->
 
   $scope.quiz = {}
   $scope.quiz.expectations = []
@@ -52,9 +54,29 @@ angular.module('app.controllers')
     valid
 
   $scope.invalid_quiz = ->
-    !!$scope.quiz.solution
+    !$scope.quiz.solution
 
   $scope.check_quiz = ->
+
+    expectations = []
+
+    $scope.quiz.expectations.forEach (exp) ->
+      nice_exp = $scope.present(exp)
+      expectations.push
+        title: nice_exp
+        code: nice_exp
+
+    verification_attrs =
+      verification:
+        expectations: expectations
+        solution: $scope.quiz.solution
+
+    verification = new Verification(verification_attrs)
+    verification.$save {},
+    (success) ->
+      console.log success
+    , (failure) ->
+      console.log failure
 
 ]
 

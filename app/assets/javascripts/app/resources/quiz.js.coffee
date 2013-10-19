@@ -3,6 +3,6 @@ angular.module('app.resources')
 .factory 'Quiz', [
   '$resource'
 ($resource) ->
-  $resource 'api/quizzes/:id', {id: '@id'}
+  $resource 'api/v1/quizzes/:id', {id: '@id'},
 ]
 

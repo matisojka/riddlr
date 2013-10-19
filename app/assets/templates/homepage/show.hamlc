@@ -27,63 +27,65 @@
 / /row
 
 #quiz-new.row(ng-controller='NewQuizCtrl')
+  .jumbotron
+    %h2 New quiz
 
-  %form(name='form')
+  .alert.alert-info
+    %h4
+      Expectations
+
+    %ul.unstyled
+      %li(ng-repeat='expectation in quiz.expectations')
+        .row
+          .col-lg-10
+            %h5
+              {{present(expectation)}}
+          .col-lg-2
+            .btn.btn-danger(ng-click='remove_expectation()' ng-show='quiz.expectations.length > 0') X
+
+  %form(name='exp_form' ng-submit='add_expectation()')
+    .form-group
+      .row
+        .col-lg-1
+          %h4
+            expect
+        .col-lg-3
+          %input.form-control(ng-model='expectation.what' placeholder='expression' required=true)
+        .col-lg-2
+          %select.form-control(ng-model='expectation.to_or_not_to')
+            %option(value='to') to
+            %option(value='not_to') not to
+        .col-lg-2
+          %select.form-control(ng-model='expectation.matcher' ng-options='m for m in matchers')
+        .col-lg-2
+          %input.form-control(ng-model='expectation.expected_value' ng-show='is_composite(expectation.matcher)' ng-required='is_composite(expectation.matcher)' placeholder='value')
+        .col-lg-1
+          %button.btn.btn-success(type='submit' ng-disabled='exp_form.$invalid') Add
+
+  %form(name='code_form')
     %fieldset
-      / Form Name
-      %legend
-        .jumbotron
-          %h2 New quiz
 
       / Textarea
-      .form-group
-        %label{for: "private_environment"} Private environment
-        %div#private_environment(ui-ace='editor_opts' ng-model='quiz.private_environment')
+      //.form-group
+      //  %label{for: "private_environment"} Private environment
+      //  %div#private_environment(ui-ace='editor_opts' ng-model='quiz.private_environment')
 
       .form-group
-        %label{for: "public_environment"} Template
+        %label{for: "public_environment"} User template
         %div#public_environment(ui-ace='editor_opts' ng-model='quiz.public_environment')
 
-      .alert.alert-info
-        %h4
-          Expectations
-
-        %ul.unstyled
-          %li(ng-repeat='expectation in quiz.expectations')
-            .row
-              .col-lg-10
-                %h5
-                  {{present(expectation)}}
-              .col-lg-2
-                .btn.btn-danger(ng-click='remove_expectation()' ng-show='quiz.expectations.length > 0') X
-
-      .form-group
-        .row
-          .col-lg-1
-            %h4
-              expect
-          .col-lg-3
-            %input.form-control(ng-model='expectation.what' placeholder='expression' required=true)
-          .col-lg-2
-            %select.form-control(ng-model='expectation.to_or_not_to')
-              %option(value='to') to
-              %option(value='not_to') not to
-          .col-lg-2
-            %select.form-control(ng-model='expectation.matcher' ng-options='m for m in matchers')
-          .col-lg-2
-            %input.form-control(ng-model='expectation.expected_value' ng-show='is_composite(expectation.matcher)' ng-required='is_composite(expectation.matcher)' placeholder='value')
-          .col-lg-1
-            %button.btn.btn-success(type='submit' ng-click='add_expectation()' ng-disabled='invalid_expectation(expectation)') Add
-
       / Textarea
       .form-group
-        %label{for: "solution"} Valid solution
+        %label{for: "solution"}
+          %strong Valid solution *
         %div#solution(ui-ace='editor_opts' ng-model='quiz.solution')
 
-      %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disable='invalid_quiz()' ng-click='check_quiz()')
+      %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disabled='invalid_quiz()' ng-click='check_quiz()')
         Check
       .clearfix
 
+  %form(name='quiz_form')
+    %fieldset
       / Text input
       .form-group
         .row
