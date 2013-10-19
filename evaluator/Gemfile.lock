@@ -1,0 +1,42 @@
+GIT
+  remote: git://github.com/yagooar/jruby-sandbox.git
+  revision: 44d1c873579ef7b00547ab7b2e6358d51dfa7089
+  specs:
+    jruby_sandbox (0.1.16-java)
+      fakefs
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.2.4)
+    fakefs (0.4.3)
+    json (1.8.1)
+    json (1.8.1-java)
+    puma (2.6.0-java)
+      rack (>= 1.1, < 2.0)
+    rack (1.5.2)
+    rack-protection (1.5.0)
+      rack
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.6)
+    rspec-expectations (2.14.3)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.4)
+    sinatra (1.4.3)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    tilt (1.4.1)
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  jruby_sandbox!
+  json
+  puma
+  rspec
+  sinatra
