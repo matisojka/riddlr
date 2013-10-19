@@ -7,6 +7,12 @@ Riddlr::Application.routes.draw do
 
   resources :quizzes, only: %i(show)
 
+  namespace :api do
+    namespace :v1 do
+      resources :quizzes, only: %i(show, create)
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

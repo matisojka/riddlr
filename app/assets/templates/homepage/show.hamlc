@@ -26,7 +26,7 @@
 
 / /row
 
-#quiz-new.row
+#quiz-new.row(ng-controller='NewQuizCtrl')
 
   %form(role='form')
     %fieldset
@@ -38,11 +38,11 @@
       / Textarea
       .form-group
         %label{for: "private_environment"} Private environment
-        %div#private_environment(ui-ace='editor_opts')
+        %div#private_environment(ui-ace='editor_opts' ng-model='quiz.private_environment')
 
       .form-group
         %label{for: "public_environment"} Public environment
-        %div#public_environment(ui-ace='editor_opts')
+        %div#public_environment(ui-ace='editor_opts' ng-model='quiz.public_environment')
 
       .form-group
         %label{for: "expectations"} Expectations
@@ -52,7 +52,7 @@
       / Textarea
       .form-group
         %label{for: "solution"} Valid solution
-        %div#solution(ui-ace='editor_opts')
+        %div#solution(ui-ace='editor_opts' ng-model='quiz.solution')
 
       %button.btn.btn-lg.btn-primary.pull-right{type: 'submit'}
         Check

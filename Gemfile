@@ -21,6 +21,8 @@ gem 'angularjs-rails'
 gem 'haml_coffee_assets'
 gem 'execjs'
 
+gem 'active_model_serializers'
+
 group :development do
   gem 'quiet_assets', github: 'evrone/quiet_assets'
   gem 'rails-erd', require: false
