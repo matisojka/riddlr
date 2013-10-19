@@ -3,6 +3,13 @@ module Api
     class QuizzesController < WebserviceController
 
       def show
+        quiz = Quiz.where(permalink: params[:id]).first
+
+        if quiz
+          render json: quiz
+        else
+          head 404
+        end
       end
 
       def create
