@@ -22,7 +22,8 @@
     .container
 
       .row.row-offcanvas.row-offcanvas-right
-        = yield
+        .col-xs-12.col-sm-9
+          = yield
         #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{role: "navigation"}
           .well.sidebar-nav
             %ul.nav

@@ -19,6 +19,18 @@ gem 'jquery-rails'
 
 gem 'turbolinks'
 
+group :development do
+  gem 'quiet_assets', github: 'evrone/quiet_assets'
+  gem 'rails-erd', require: false
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+group :development, :test do
+  gem 'pry-rails'
+end
+
 group :doc do
   gem 'sdoc', require: false
 end
