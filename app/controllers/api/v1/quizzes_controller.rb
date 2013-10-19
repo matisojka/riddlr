@@ -19,10 +19,13 @@ module Api
           if quiz.save
             render json: quiz
           else
-            render json: { quiz: {passes: true, errors: quiz.errors } }
+            render json: { quiz: {passes: true, errors: quiz.errors } }, status: 422
           end
         else
-          render json: validator.response, serializer: BackendResponseSerializer, root: 'quiz'
+          render json: validator.response,
+            serializer: BackendResponseSerializer,
+            root: 'quiz',
+            status: 422
         end
       end
 
@@ -41,7 +44,8 @@ module Api
           else
             render json: validator.response,
               serializer: BackendResponseSerializer,
-              root: 'verification'
+              root: 'verification',
+              status: 422
           end
         else
           head 404
