@@ -26,8 +26,24 @@ module Api
         end
       end
 
+      def verification
+        quiz = Quiz.where(permalink: params[:id]).first
+        validator = QuizValidator.new(quiz, verification_params[:code])
+
+        if quiz
+          render json: validator.response,
+            serializer: BackendResponseSerializer,
+            root: 'verification'
+        else
+          head 404
+        end
+      end
+
       private
 
+      def verification_params
+        params.require(:verification).permit(:code)
+      end
 
       def quiz_params
         params.require(:quiz).permit(

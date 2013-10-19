@@ -9,7 +9,11 @@ Riddlr::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :quizzes, only: %i(show create)
+      resources :quizzes, only: %i(show create) do
+        member do
+          post :verification
+        end
+      end
       resources :verifications, only: :create
     end
   end

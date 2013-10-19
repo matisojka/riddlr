@@ -1,8 +1,9 @@
 class QuizValidator
-  attr_reader :quiz
+  attr_reader :quiz, :user_code
 
-  def initialize(quiz)
+  def initialize(quiz, user_code = nil)
     @quiz = quiz
+    @user_code = user_code || quiz.solution
   end
 
   def call
@@ -14,13 +15,13 @@ class QuizValidator
   end
 
   def response
-    @response ||= backend.eval(quiz.private_environment, quiz.solution, expectations)
+    @response ||= backend.eval(quiz.private_environment, user_code, expectations)
   end
 
   private
 
   def expectations
-    quiz.expectations.map do |expectation|
+    quiz.expectations['expectations'].map do |expectation|
       Expectation.from_hash(expectation)
     end
   end
