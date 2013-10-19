@@ -37,6 +37,7 @@ module Api
           if validator.call
             solution = Solution.create( quiz: quiz,
                           code: verification_params[:code],
+                          author: verification_params[:author],
                           passed: validator.response.passed?,
                           expectations: validator.response.expectations,
                           time: validator.response.total_time,
@@ -57,7 +58,7 @@ module Api
       private
 
       def verification_params
-        params.require(:verification).permit(:code)
+        params.require(:verification).permit(:code, :author)
       end
 
       def quiz_params

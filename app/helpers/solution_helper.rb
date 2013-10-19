@@ -6,4 +6,8 @@ module SolutionHelper
   def convert_to_ms(seconds)
     (seconds*1000).round
   end
+
+  def display_author(author)
+    author || "Anonymous"
+  end
 end

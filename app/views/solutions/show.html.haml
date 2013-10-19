@@ -32,7 +32,7 @@
       - Solution.fastest_for(@solution.quiz).each do |solution|
         %tr{ class: solution.id == @solution.id && 'warning' }
           %td
-            = link_to "Anonymous", solution_path(solution)
+            = link_to display_author(solution.author), solution_path(solution)
           %td
             #{convert_to_ms(solution.time).to_s} ms
 
@@ -48,7 +48,7 @@
       - Solution.smallest_for(@solution.quiz).each do |solution|
         %tr{ class: solution.id == @solution.id && 'warning' }
           %td
-            = link_to "Anonymous", solution_path(solution)
+            = link_to display_author(solution.author), solution_path(solution)
           %td
             = solution.code_length
 
