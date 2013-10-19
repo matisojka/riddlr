@@ -13,6 +13,8 @@ gem 'therubyracer', platforms: :ruby
 gem 'haml-rails'
 
 gem 'less-rails'
+gem 'less-rails-bootstrap'
+
 gem 'jquery-rails'
 
 gem 'turbolinks'
