@@ -35,6 +35,8 @@ module Api
           504
         elsif backend_response.error?
           500
+        elsif !backend_response.passed?
+          422
         else
           200
         end
