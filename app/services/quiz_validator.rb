@@ -1,4 +1,4 @@
-class QuizValidator
+class QuizValidator < ActiveModel::Serializer
   attr_reader :quiz, :user_code
 
   def initialize(quiz, user_code = nil)

@@ -31,9 +31,18 @@ module Api
         validator = QuizValidator.new(quiz, verification_params[:code])
 
         if quiz
-          render json: validator.response,
-            serializer: BackendResponseSerializer,
-            root: 'verification'
+          if validator.call
+            solution = Solution.create( quiz: quiz,
+                          code: verification_params[:code],
+                          passed: validator.response.passed?,
+                          expectations: validator.response.expectations)
+
+            render json: solution
+          else
+            render json: validator.response,
+              serializer: BackendResponseSerializer,
+              root: 'verification'
+          end
         else
           head 404
         end

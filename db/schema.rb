@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019144957) do
+ActiveRecord::Schema.define(version: 20131019174809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,5 +35,16 @@ ActiveRecord::Schema.define(version: 20131019144957) do
   end
 
   add_index "quizzes", ["permalink"], name: "index_quizzes_on_permalink", using: :btree
+
+  create_table "solutions", force: true do |t|
+    t.integer  "quiz_id"
+    t.text     "code"
+    t.boolean  "passed"
+    t.json     "expectations"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "solutions", ["quiz_id"], name: "index_solutions_on_quiz_id", using: :btree
 
 end
