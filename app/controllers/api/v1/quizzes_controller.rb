@@ -1,11 +1,44 @@
-class Api::V1::QuizzesController < ApplicationController
+module Api
+  module V1
+    class QuizzesController < WebserviceController
 
-  def show
+      def show
+      end
+
+      def create
+        quiz = Quiz.new(quiz_params)
+        validator = QuizValidator.new(quiz)
+        if validator.call
+          if quiz.save
+            render json: quiz
+          else
+            render json: { quiz: {passes: true, errors: quiz.errors } }
+          end
+        else
+          render json: validator.response, serializer: BackendResponseSerializer, root: 'quiz'
+        end
+      end
+
+      private
+
+
+      def quiz_params
+        params.require(:quiz).permit(
+          :title,
+          :description,
+          :goal,
+          :private_environment,
+          :public_environment,
+          :solution,
+          :hints,
+          :difficulty,
+          :tags,
+          :author,
+          :private,
+          {expectations: [:title, :code] }
+        )
+      end
+    end
   end
-
-  def create
-    binding.pry
-  end
-
 end
 

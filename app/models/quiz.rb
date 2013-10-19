@@ -3,7 +3,7 @@ class Quiz < ActiveRecord::Base
 
   validates_uniqueness_of :permalink
 
-  before_create :generate_permalink
+  before_create :generate_permalink, :wrap_expectations
 
   def to_param
     self.permalink
@@ -13,6 +13,12 @@ class Quiz < ActiveRecord::Base
 
   def generate_permalink
     self.permalink =  SecureRandom.hex(12).upcase
+  end
+
+  def wrap_expectations
+    if self.expectations.is_a?(Array)
+      self.expectations = {expectations: self.expectations}
+    end
   end
 
 end
