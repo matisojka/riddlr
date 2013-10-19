@@ -51,6 +51,7 @@ test:
   pool: 5
   username: riddlr
   password:
+  host: localhost
 
 production:
   adapter: postgresql
