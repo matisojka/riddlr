@@ -39,7 +39,7 @@
         .row
           .col-lg-10
             %h5
-              {{present(expectation)}}
+              {{expectation.code}}
           .col-lg-2
             .btn.btn-danger(ng-click='remove_expectation()' ng-show='quiz.expectations.length > 0') X
 
@@ -80,66 +80,83 @@
           %strong Valid solution *
         %div#solution(ui-ace='editor_opts' ng-model='quiz.solution')
 
-      %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disabled='invalid_quiz()' ng-click='check_quiz()')
-        Check
+      %span(ng-hide='code_verified')
+        %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disabled='invalid_code()' ng-click='verify_code()')
+          %span(ng-hide='verifying_code')
+            Check
+          %span(ng-show='verifying_code')
+            Checking
+
+      %span(ng-show='code_verified')
+        %button.btn.btn-lg.btn-success.pull-right(ng-disabled: true)
+          Checked
+
       .clearfix
 
-  %form(name='quiz_form')
-    %fieldset
-      / Text input
-      .form-group
-        .row
-          .col-lg-6
-            %label{for: "title"} Title
-            %input#title.form-control{name: "title", placeholder: "Enumerable #map", required: true, type: "text"}/
-            %p.help-block Choose a short, descriptive title
+  /%span(ng-show='code_verified')
+  %span
 
-          .col-lg-6
-            %label{for: "goal"} Goal
-            %input#goal.form-control{name: "goal", placeholder: "Multiply all elements by 2", required: true, type: "text"}/
-            %p.help-block A short, concise summary of the goal
+    %form(name='quiz_form')
+      %fieldset
+        / Text input
+        .form-group
+          .row
+            .col-lg-6
+              %label{for: "title"} Title *
+              %input#title.form-control(name='title' ng-model='quiz.title' placeholder="Enumerable #map" required=true type="text")/
+              %p.help-block Choose a short, descriptive title
 
-      / Textarea
-      .form-group
-        %label{for: "description"} Description
-        %textarea#description.form-control{name: "description", rows: 5}
-          :preserve
-            Add a full description of your quiz.
-            You can add an introduction, explain a ruby method or just explain what the environment is and what you expect.
-            You can use markdown in here.
+            .col-lg-6
+              %label{for: "goal"} Goal *
+              %input#goal.form-control(name="goal" ng-model='quiz.goal' placeholder="Multiply all elements by 2" required=true type="text")/
+              %p.help-block A short, concise summary of the goal
 
+        / Textarea
+        .form-group
+          %label{for: "description"} Description
+          %textarea#description.form-control{name: "description", rows: 5}
+            :preserve
+              Add a full description of your quiz.
+              You can add an introduction, explain a ruby method or just explain what the environment is and what you expect.
 
-      / Text input
-      .form-group
-        %label{for: "hints"} Hints
-        %input#hints.form-control{name: "hints", placeholder: "Try to multiply every element by 2", type: "text"}/
-        %p.help-block hints
+        / Text input
+        .form-group
+          %label{for: "hints"} Hints
+          %input#hints.form-control{name: "hints", placeholder: "Try to multiply every element by 2", type: "text"}/
+          %p.help-block hints
 
-      / Select Basic
-      .form-group
-        .row
-          .col-lg-4
-            %label{for: "difficulty"} Difficulty
-            %select#difficulty.form-control{name: "difficulty"}
-              %option Easy
-              %option Intermediate
-              %option Difficult
-              %option Master
+        / Select Basic
+        .form-group
+          .row
+            .col-lg-4
+              %label{for: "difficulty"} Difficulty
+              %select#difficulty.form-control(name="difficulty" ng-model='quiz.difficulty')
+                %option(value='easy') Easy
+                %option(value='intermediate') Intermediate
+                %option(value='difficult') Difficult
+                %option(value='master') Master
 
-          .col-lg-4
-            %label{for: "author"} Author
-            %input#author.form-control{name: "author", placeholder: "John Doe", type: "text"}/
-            %p.help-block Add your name if you want
+            .col-lg-4
+              %label{for: "author"} Author
+              %input#author.form-control(name="author" ng-model='quiz.author' placeholder="John Doe" type="text")/
+              %p.help-block Add your name if you want
 
-          .col-lg-4
-            %label{for: "private"} Private?
-            .checkbox
-              %input#private.checkbox{name: "private", type: "checkbox", value: "Yes"}/
-                Yes (only accessible through a link)
+            .col-lg-4
+              %label{for: "private"} Private?
+              .checkbox
+                %input#private.checkbox(name="private" type="checkbox" ng-model='quiz.private')/
+                  Yes (only accessible through a link)
 
-      / Text input
-      .form-group
-        %label{for: "tags"} Tags
-        %input#tags.form-control{name: "tags", placeholder: "enumerable, map", type: "text"}/
-        %p.help-block Add some tags
+        / Text input
+        .form-group
+          %label{for: "tags"} Tags
+          %input#tags.form-control(name="tags" ng-model='quiz.tags' placeholder="enumerable, map" type="text")/
+          %p.help-block Add some tags
+
+        %span(ng-hide='quiz_persisted')
+          %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disabled='invalid_quiz()' ng-click='save_quiz()')
+            %span(ng-hide='verifying_quiz')
+              Save
+            %span(ng-show='verifying_quiz')
+              Saving
 

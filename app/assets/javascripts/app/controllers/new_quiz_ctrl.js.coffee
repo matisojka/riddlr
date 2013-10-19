@@ -4,16 +4,38 @@ angular.module('app.controllers')
   '$scope'
   'Verification'
 
-($scope, Verification) ->
+($scope, Verification, Quiz) ->
 
   $scope.quiz = {}
-  $scope.quiz.expectations = []
+  $scope.raw_expectations = [
+    what: 'sum(2,1)'
+    to_or_not_to: 'to'
+    matcher: 'eq'
+    expected_value: '3'
+  ]
+
+  $scope.$watch 'raw_expectations', ((expectations) ->
+    if expectations
+      $scope.quiz.expectations = []
+      expectations.forEach (exp) ->
+        nice_exp = $scope.present(exp)
+        $scope.quiz.expectations.push
+          title: nice_exp
+          code: nice_exp
+  ), true
+
+  $scope.quiz.public_environment = "def sum(a, b)\n  a + b\nend"
+  $scope.quiz.solution = "def sum(a, b)\n  # user code here\nend"
+  $scope.quiz.difficulty = 'easy'
 
   init_expectation = ->
     $scope.expectation = {}
     $scope.expectation.to_or_not_to = 'to'
     $scope.expectation.matcher = 'eq'
   init_expectation()
+
+  $scope.quiz.title = 'Sum of two integers'
+  $scope.quiz.goal = 'Write a method that sums two integers'
 
   $scope.simple_matchers = [
     'be'
@@ -32,7 +54,7 @@ angular.module('app.controllers')
     matcher in $scope.composite_matchers
 
   $scope.add_expectation = ->
-    $scope.quiz.expectations.push($scope.expectation)
+    $scope.raw_expectations.push($scope.expectation)
     init_expectation()
 
   $scope.present = (expectation) ->
@@ -53,30 +75,35 @@ angular.module('app.controllers')
 
     valid
 
-  $scope.invalid_quiz = ->
-    !$scope.quiz.solution
+  $scope.invalid_code = ->
+    !$scope.quiz.solution or $scope.quiz.expectations.length == 0
 
-  $scope.check_quiz = ->
-
-    expectations = []
-
-    $scope.quiz.expectations.forEach (exp) ->
-      nice_exp = $scope.present(exp)
-      expectations.push
-        title: nice_exp
-        code: nice_exp
+  $scope.verify_code = ->
+    $scope.verifying_code = true
 
     verification_attrs =
       verification:
-        expectations: expectations
+        expectations: $scope.quiz.expectations
         solution: $scope.quiz.solution
 
-    verification = new Verification(verification_attrs)
-    verification.$save {},
+    $scope.verification = new Verification(verification_attrs)
+
+    $scope.verification.$save {},
     (success) ->
+      $scope.code_verified = true
+      $scope.verifying_code = false
       console.log success
     , (failure) ->
       console.log failure
+      $scope.verifying_code = false
+
+  $scope.invalid_quiz = ->
+    !$scope.code_verified or
+      !$scope.quiz.title or
+      !$scope.quiz.goal
+
+  $scope.save_quiz = ->
+    quiz = Quiz.new($scope.quiz)
 
 ]
 
