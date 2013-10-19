@@ -8,7 +8,6 @@ class Expectation
   def initialize(title, code)
     @title = title
     @code = code
-    @passed = passed
   end
 
   def passed?
