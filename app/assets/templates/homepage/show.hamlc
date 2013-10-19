@@ -80,15 +80,20 @@
           %strong Valid solution *
         %div#solution(ui-ace='editor_opts' ng-model='quiz.solution')
 
-      %span(ng-hide='code_verified')
-        %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disabled='invalid_code()' ng-click='verify_code()')
-          %span(ng-hide='verifying_code')
-            Check
-          %span(ng-show='verifying_code')
-            Checking
+      %span(ng-show='code_verification == "failed"')
+        %button.btn.btn-lg.btn-danger.pull-right(ng-disabled=true)
+          Failed
 
-      %span(ng-show='code_verified')
-        %button.btn.btn-lg.btn-success.pull-right(ng-disabled: true)
+      %span(ng-show='code_verification == "verifying"')
+        %button.btn.btn-lg.btn-primary.pull-right(ng-disabled=true)
+          Checking
+
+      %span(ng-show='code_verification == undefined')
+        %button.btn.btn-lg.btn-primary.pull-right(type='submit' ng-disabled='invalid_code()' ng-click='verify_code()')
+          Check
+
+      %span(ng-show='code_verification == "passed"')
+        %button.btn.btn-lg.btn-success.pull-right(ng-disabled=true)
           Checked
 
       .clearfix

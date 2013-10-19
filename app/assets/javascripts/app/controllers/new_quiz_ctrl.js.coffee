@@ -3,6 +3,7 @@ angular.module('app.controllers')
 .controller 'NewQuizCtrl', [
   '$scope'
   'Verification'
+  'Quiz'
 
 ($scope, Verification, Quiz) ->
 
@@ -24,8 +25,9 @@ angular.module('app.controllers')
           code: nice_exp
   ), true
 
+  $scope.quiz.solution = "def sum(a, b)\n  a + b\nend"
+  # $scope.quiz.public_environment = "def sum(a, b)\n  # user code here\nend"
   $scope.quiz.public_environment = "def sum(a, b)\n  a + b\nend"
-  $scope.quiz.solution = "def sum(a, b)\n  # user code here\nend"
   $scope.quiz.difficulty = 'easy'
 
   init_expectation = ->
@@ -79,7 +81,7 @@ angular.module('app.controllers')
     !$scope.quiz.solution or $scope.quiz.expectations.length == 0
 
   $scope.verify_code = ->
-    $scope.verifying_code = true
+    $scope.code_verification = 'verifying'
 
     verification_attrs =
       verification:
@@ -90,20 +92,29 @@ angular.module('app.controllers')
 
     $scope.verification.$save {},
     (success) ->
-      $scope.code_verified = true
-      $scope.verifying_code = false
-      console.log success
+      $scope.code_verification = 'passed'
     , (failure) ->
-      console.log failure
-      $scope.verifying_code = false
+      $scope.code_verification = 'failed'
 
   $scope.invalid_quiz = ->
-    !$scope.code_verified or
+    $scope.code_verification is not "passed" or
       !$scope.quiz.title or
       !$scope.quiz.goal
 
   $scope.save_quiz = ->
-    quiz = Quiz.new($scope.quiz)
+    console.log 1
+
+    quiz_attrs =
+      quiz: $scope.quiz
+
+    quiz = new Quiz(quiz_attrs)
+    console.log quiz
+
+    quiz.$save {},
+    (success) ->
+      console.log success
+    , (failure) ->
+      console.log failure
 
 ]
 
