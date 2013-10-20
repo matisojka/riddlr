@@ -6,6 +6,11 @@
     %small The Riddlr
 
   .well.sidebar-nav
+    = link_to new_quiz_path do
+      %button.btn.btn-primary(style='width: 100%; margin-bottom: 5px')
+        %i.icon-puzzle-piece
+        Create new quiz
+
     %ul.nav.nav-tabs(style='cursor: pointer')
       %li.active
         %a(data-target="#latest" data-toggle="tab") Latest
