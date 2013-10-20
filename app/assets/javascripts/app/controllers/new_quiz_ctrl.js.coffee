@@ -8,8 +8,8 @@ angular.module('app.controllers')
 ($scope, $window, Quiz) ->
 
   $scope.quiz =
-    solution: "def sum(a, b)\n  a + b\nend"
-    public_environment: "def sum(a, b)\n  # user code here\nend"
+    solution: "# Provide a valid solution so that we know you're not kidding!\n\ndef sum(a, b)\n  a + b\nend"
+    public_environment: "# Put a description here for the solvers of your quiz.\n# Explain the goals and what you expect.\n\n def sum(a, b)\n  # user code here\nend"
     difficulty: 'easy'
     expectations: []
     tags: {tags: []}
