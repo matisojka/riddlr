@@ -24,6 +24,9 @@ angular.module('app.controllers')
 
   $scope.save = ->
     $scope.quiz_state = 'saving'
+    $scope.syntax_error = null
+    $scope.resolved_expectations = []
+
     quiz_attrs =
       quiz: $scope.quiz
 
@@ -41,6 +44,14 @@ angular.module('app.controllers')
     $scope.quiz.url = success.quiz.url
     $('#success-modal').modal
       keyboard: false
+
+  $scope.quiz_not_saved = (failure) ->
+    syntax_error = failure.data.quiz
+
+    if syntax_error.error
+      $scope.syntax_error = syntax_error
+    else
+      $scope.resolved_expectations = failure.data.quiz.expectations
 
 ]
 
