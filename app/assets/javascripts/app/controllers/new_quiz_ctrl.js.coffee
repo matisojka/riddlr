@@ -11,8 +11,6 @@ angular.module('app.controllers')
     solution: "def sum(a, b)\n  a + b\nend"
     public_environment: "def sum(a, b)\n  # user code here\nend"
     difficulty: 'easy'
-    title: 'Sum of two integers'
-    goal: 'Write a method that sums two integers'
     expectations: []
     tags: {tags: []}
 
@@ -28,8 +26,7 @@ angular.module('app.controllers')
 
   $scope.invalid_quiz = ->
     $scope.quiz.expectations.length == 0 or
-      !$scope.quiz.title or
-      !$scope.quiz.goal
+      !$scope.quiz.title
 
   $scope.private_save = ->
     $scope.quiz.private = true
