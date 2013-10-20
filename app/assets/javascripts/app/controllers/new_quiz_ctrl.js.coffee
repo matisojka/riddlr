@@ -39,7 +39,8 @@ angular.module('app.controllers')
 
   $scope.quiz_saved = (success) ->
     $scope.quiz.url = success.quiz.url
-    $('#success-modal').modal('toggle')
+    $('#success-modal').modal
+      keyboard: false
 
 ]
 

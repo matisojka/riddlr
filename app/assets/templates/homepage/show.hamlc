@@ -98,7 +98,6 @@
       .modal-content
 
         .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-success
             %i.icon-check
             Success! Your quiz has been created!
@@ -108,20 +107,17 @@
             Copy the quiz link and send it to your friends
 
           .row
-            .col-lg-10.has-warning
+            .col-lg-10
               %input.form-control.disabled(ng-model='quiz.url' readonly=true style='cursor: text' select-on-click=true)
 
             .col-lg-1
-              %a.twitter(href='https://twitter.com/share?text=I challenge you to a Ruby Quiz! {{quiz.title}} - {{quiz.url}}' target='_blank')
-                %span.icon-stack.icon-large.pull-left
-                  %i.icon-check-empty.icon-stack-base
-                  %i.icon-twitter
-              :javascript
-                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+              %a.btn.btn-primary(href='https://twitter.com/share?text=I challenge you to a Ruby Quiz! {{quiz.title}} - {{quiz.url}}' target='_blank')
+                %i.icon-twitter.icon-large
 
         .modal-footer
+          %a.btn.btn-warning(href='{{quiz.url}}')
+            Go to the quiz
 
-          %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
       / /.modal-content
     / /.modal-dialog
   / /.modal
