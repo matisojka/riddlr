@@ -121,7 +121,9 @@ class EvalBackend
         }
         log = ['log/restart_sinatra.log', 'a']
 
-        system(env, "jruby -S bundle exec jruby server.rb &", out: log, err: log)
+        system(env,
+               "/home/www-data/jruby/bin/jruby -S bundle exec /home/www-data/jruby/bin/jruby server.rb &",
+               out: log, err: log)
       end
     end
 
