@@ -25,7 +25,8 @@
         .col-xs-12.col-sm-9(ng-view=true)
           = yield
         #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{role: "navigation"}
-          = render 'shared/sidebar'
+          =cache expires_in: 2.minutes do
+            = render 'shared/sidebar'
           / /.well
         / /span
       / /row
