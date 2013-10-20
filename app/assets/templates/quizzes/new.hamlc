@@ -126,7 +126,7 @@
             %input.form-control.disabled(ng-model='quiz.url' readonly=true style='cursor: text' select-on-click=true)
 
           .col-lg-1
-            %a.btn.btn-primary(href='https://twitter.com/share?text=I challenge you to a Ruby Quiz! {{quiz.title}} - {{quiz.url}}' target='_blank')
+            %a.btn.btn-primary(href='https://twitter.com/share?text=Riddle me this! {{quiz.title}} - {{quiz.url}}' target='_blank')
               %i.icon-twitter.icon-large
 
       .modal-footer
