@@ -1,1 +1,38 @@
-homepage
+.jumbotron
+  .row
+    .col-lg-4
+      %span.icon-stack(style='font-size: 120px')
+        %i.icon-question.icon-rotate-180(style='color: #ee5f5b')
+        %i.icon-check-empty.icon-stack-base(style='color: #62bd4f')
+    .col-lg-8
+      %h1(style='font-size: 100px')
+        Riddlr
+      %h3
+        Ruby quizzes for everyone!
+
+.row
+  .col-lg-4
+    %img.img-circle{alt: "140x140", src: asset_path('create.png'), style: "width: 240px; height: 240px;"}/
+    %h2 Create
+    %p Create your own quizzes and challenge your friends and colleagues! Write the code, add some expectations and let us check it for you. After that, you'll be able to share it to the world.
+
+    %p
+      %a.btn.btn-default{href: "#"} Create my quiz »
+  / /.col-lg-4
+  .col-lg-4
+    %img.img-circle{alt: "140x140", src: asset_path('share.png'), style: "width: 240px; height: 240px;"}/
+    %h2 Share
+    %p
+      It's dead easy to share a quiz with the world. Just create a quiz, get a link and copy or tweet it. If you prefer some privacy, you can also create private quizzes.
+    %p
+      %a.btn.btn-default(href='https://twitter.com/share?text=Check out Riddlr, Ruby quizzes for everyone! #{root_url}' target='_blank')
+        Tweet about us! »
+  / /.col-lg-4
+  .col-lg-4
+    %img.img-circle{alt: "140x140", src: asset_path('solve.png'), style: "width: 240px; height: 240px;"}/
+    %h2 Solve
+    %p
+      Not being creative today? Just check out other people's quizzes. Solve them to be the best in the ranking! Find cool challenges on the right sidebar or just hit the button below!
+    %p
+      %a.btn.btn-default{href: random_quiz_path} Solve a random quiz »
+  / /.col-lg-4

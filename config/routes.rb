@@ -5,7 +5,9 @@ Riddlr::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'homepage#show'
 
+  get 'quizzes/random' => 'quizzes#random', as: :random_quiz
   resources :quizzes, only: %i(new show)
+
   resources :solutions, only: %i(show)
 
   namespace :api do

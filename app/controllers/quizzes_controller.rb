@@ -6,4 +6,8 @@ class QuizzesController < ApplicationController
   def show
   end
 
+  def random
+    redirect_to quiz_path(Quiz.first(order: 'RANDOM()'))
+  end
+
 end
