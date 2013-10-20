@@ -37,6 +37,7 @@ angular.module('app.controllers')
 
   $scope.composite_matchers = [
     'eq'
+    'be_include'
   ]
 
   $scope.matchers = $scope.simple_matchers.concat $scope.composite_matchers
