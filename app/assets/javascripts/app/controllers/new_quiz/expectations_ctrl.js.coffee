@@ -33,11 +33,16 @@ angular.module('app.controllers')
     'be_true'
     'be_false'
     'be_nil'
+    'be_empty'
   ]
 
   $scope.composite_matchers = [
+    'be_a'
     'eq'
     'be_include'
+    'be_a'
+    'be_an'
+    'respond_to'
   ]
 
   $scope.matchers = $scope.simple_matchers.concat $scope.composite_matchers
