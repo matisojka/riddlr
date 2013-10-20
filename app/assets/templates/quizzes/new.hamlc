@@ -108,7 +108,7 @@
 
 .clearfix
 
-#success-modal.modal.fade
+#success-modal.modal.fade(style='margin-top: 30px')
   .modal-dialog
     .modal-content
 
