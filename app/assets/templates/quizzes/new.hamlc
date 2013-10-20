@@ -126,7 +126,7 @@
 
       .modal-body
         %h5
-          Copy the quiz link and send it to your friends
+          Copy the quiz link and send it to your friends:
 
         .row
           .col-lg-10
@@ -135,6 +135,13 @@
           .col-lg-1
             %a.btn.btn-primary(href='https://twitter.com/share?text=Riddle me this! {{quiz.title}} - {{quiz.url}}' target='_blank')
               %i.icon-twitter.icon-large
+
+        %h5
+          Remember this link to access your quizz' solution:
+
+        .row
+          .col-lg-12
+            %input.form-control.disabled(value='{{quiz.url}}/solutions' readonly=true style='cursor: text' select-on-click=true)
 
       .modal-footer
         %a.btn.btn-warning(ng-click='go_to_quiz_url(quiz)')
