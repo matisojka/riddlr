@@ -36,6 +36,11 @@
 
       %footer(ng-controller='FooterCtrl')
         %p
+          = link_to root_path, class: 'homepage-icon' do
+            %span.icon-stack
+              %i.icon-question.icon-rotate-180(style='color: #ee5f5b')
+              %i.icon-check-empty.icon-stack-base(style='color: #62bd4f')
+
           Build with love & club mate by
 
           %a(ng-click='open()' style='cursor: pointer')
