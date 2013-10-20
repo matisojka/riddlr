@@ -34,6 +34,8 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    albino (1.3.3)
+      posix-spawn (>= 0.3.6)
     angularjs-rails (1.0.7)
     arel (4.0.0)
     atomic (1.1.14)
@@ -110,6 +112,7 @@ GEM
       net-ssh (>= 2.6.5)
     pg (0.17.0)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -197,11 +200,11 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  albino
   angularjs-rails
   better_errors
   binding_of_caller
   capistrano (~> 2.15)
-  coderay
   coffee-rails (~> 4.0.0)
   execjs
   haml-rails

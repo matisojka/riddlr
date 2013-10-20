@@ -1,10 +1,14 @@
 module SolutionHelper
-  def render_code(code)
-    CodeRay.scan(code, :ruby).div.html_safe
+  def really_convert_to_ms(seconds)
+    value = (seconds*1000).ceil
+
+    value == 0 ? 1 : value
   end
 
   def convert_to_ms(seconds)
-    (seconds*1000).round
+    value = (seconds*1000).ceil
+
+    value == 0 ? 'too fast to measure!' : value
   end
 
   def display_author(author)

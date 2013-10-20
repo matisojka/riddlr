@@ -26,8 +26,6 @@ gem 'active_model_serializers'
 
 gem 'rest-client'
 
-gem 'coderay'
-
 group :development do
   gem 'quiet_assets', github: 'evrone/quiet_assets'
   gem 'rails-erd', require: false

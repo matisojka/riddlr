@@ -15,17 +15,27 @@
       .panel-heading(style="padding: 10px")
         If you had fun recommend it to your friends:
       .panel-body
-        %input.form-control.disabled{value: quiz_url(@solution.quiz), readonly: true, style: 'cursor: text', 'select-on-click' => true}
+        .row
+          .col-lg-10
+            %input.form-control.disabled{value: quiz_url(@solution.quiz), readonly: true, style: 'cursor: text', 'select-on-click' => true}
+          .col-lg-1
+            %a.btn.btn-primary(href="https://twitter.com/share?text=I challenge you to a Ruby Quiz! #{@solution.quiz.title} - #{quiz_url(@solution.quiz)}" target='_blank')
+              %i.icon-twitter.icon-large
 
     %p
-      Your solution took us
-      %strong #{convert_to_ms(@solution.time)}
-      ms of computing power and
-      %strong #{@solution.code_length}
-      characters of disc space!
+      Your solution took us about
+      %code
+        = really_convert_to_ms(@solution.time)
+        ms
+      of computing power, and is
+      %code
+        = @solution.code_length
+        characters
+      worth of disc space!
 
-    .code
-      = render_code(@solution.code)
+    %div
+      %span(ng-init="code='#{@solution.code}'")
+      %div#public_environment(ui-ace='{mode: "ruby"}' ng-model='code' style='height: 140px' readonly='true')
 
     %h2 See how the others did:
 
@@ -47,18 +57,27 @@
         = time_ago_in_words(@solution.created_at)
         ago
 
-      %p
-        The solution took us
-        %code
-          = convert_to_ms(@solution.time)
-          ms
-        of computing power, and is
-        %code
-          = @solution.code_length
-          characters
-        worth of disc space!
-        %p
-          &nbsp;
+    %p
+      &nbsp;
+
+    %p
+      The solution took us about
+      %code
+        = really_convert_to_ms(@solution.time)
+        ms
+      of computing power, and is
+      %code
+        = @solution.code_length
+        characters
+      worth of disc space!
+
+    %div
+      %span(ng-init="code='#{@solution.code}'")
+      %div#public_environment(ui-ace='{mode: "ruby"}' ng-model='code' style='height: 140px' readonly='true')
+
+    %p
+      &nbsp;
+
 
     .panel.panel-default
       .panel-heading(style="padding: 10px")
@@ -87,7 +106,7 @@
           %td
             = link_to display_author(solution.author), solution_path(solution)
           %td
-            #{convert_to_ms(solution.time).to_s} ms
+            #{convert_to_ms(solution.time).to_s}
 
   .col-lg-6
     %h3 Space-savers
