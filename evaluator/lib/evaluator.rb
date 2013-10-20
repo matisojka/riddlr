@@ -75,15 +75,15 @@ module Riddlr
       eval_string << "result[:expectations] = []"
 
       @expectations.each do |expecation|
-        title = expecation['title']
+        title = expecation['title'].gsub('"', "\\\"")
         _code = expecation['code']
 
         eval_string << "begin"
         eval_string << _code
-        eval_string << "result[:expectations] << {title: '#{title}', passes: true}"
+        eval_string << %|result[:expectations] << {title: "#{title}", passes: true}|
 
         eval_string << "rescue Exception => e"
-        eval_string << "result[:expectations] << { title: '#{title}', error: e.to_s, backtrace: e.backtrace, message: e.message }"
+        eval_string << %|result[:expectations] << { title: "#{title}", error: e.to_s, backtrace: e.backtrace, message: e.message }|
         eval_string << "end"
       end
 
