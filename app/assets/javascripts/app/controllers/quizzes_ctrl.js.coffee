@@ -14,11 +14,12 @@ angular.module('app.controllers')
   get_quiz = ->
     $scope.loading_quiz = true
 
-    Quiz.get
-      id: $scope.quiz_id
-    , (success) ->
-      $scope.loading_quiz = false
-      $scope.quiz = success.quiz
+    if $scope.quiz_id
+      Quiz.get
+        id: $scope.quiz_id
+      , (success) ->
+        $scope.loading_quiz = false
+        $scope.quiz = success.quiz
 
   get_quiz()
 
