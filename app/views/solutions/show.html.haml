@@ -1,6 +1,6 @@
 - if @users_solution
 
-  %span(ng-app='riddlr')
+  %span
     .jumbotron
       %h1
         %i.icon-thumbs-up
@@ -40,7 +40,7 @@
     %h2 See how the others did:
 
 - else
-  %span(ng-app='riddlr')
+  %span
     .well
       %h1
         = link_to @solution.quiz.title, quiz_path(@solution.quiz)

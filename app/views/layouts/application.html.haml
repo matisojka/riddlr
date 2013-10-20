@@ -23,7 +23,7 @@
     .container(style='margin-top: 20px')
 
       .row.row-offcanvas.row-offcanvas-right
-        #content.col-xs-12.col-sm-9{'ng-view' => angular? ? 'riddlr' : nil}
+        #content.col-xs-12.col-sm-9{'ng-view' => angular? ? 'true' : nil}
           = yield
 
         #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{role: "navigation"}
