@@ -1,23 +1,76 @@
-%h1 Looks like you made it!
-%p
-  Congratulations you solved quiz
-  %strong= @solution.quiz.title+"!"
-  If you had fun recommend it to your friends:
+- if @users_solution
 
-.alert.alert-info
-  = link_to quiz_url(@solution.quiz), quiz_url(@solution.quiz)
+  %span(ng-app='riddlr')
+    .jumbotron
+      %h1
+        %i.icon-thumbs-up
+        You made it!
+      %h3
+        Congratulations, you solved the quiz
+        %strong
+          %code= @solution.quiz.title
+        \!
 
-%p
-  Your solution took us
-  %strong #{convert_to_ms(@solution.time)}
-  ms of computing power and
-  %strong #{@solution.code_length}
-  charakters of disc space!
+    .panel.panel-default
+      .panel-heading(style="padding: 10px")
+        If you had fun recommend it to your friends:
+      .panel-body
+        %input.form-control.disabled{value: quiz_url(@solution.quiz), readonly: true, style: 'cursor: text', 'select-on-click' => true}
 
-.code
-  = render_code(@solution.code)
+    %p
+      Your solution took us
+      %strong #{convert_to_ms(@solution.time)}
+      ms of computing power and
+      %strong #{@solution.code_length}
+      characters of disc space!
 
-%h2 See how the others did
+    .code
+      = render_code(@solution.code)
+
+    %h2 See how the others did:
+
+- else
+  %span(ng-app='riddlr')
+    .well
+      %h1
+        = link_to @solution.quiz.title, quiz_path(@solution.quiz)
+        .pull-right
+          = link_to 'Solve it!', quiz_path(@solution.quiz), class: 'btn btn-primary btn-lg'
+      %h4
+        by
+        = @solution.quiz.author || 'Anonymous'
+
+    %div(style='margin: 10px;')
+      %h3
+        Solved by
+        = "#{@solution.author || 'Anonymous'},"
+        = time_ago_in_words(@solution.created_at)
+        ago
+
+      %p
+        The solution took us
+        %code
+          = convert_to_ms(@solution.time)
+          ms
+        of computing power, and is
+        %code
+          = @solution.code_length
+          characters
+        worth of disc space!
+        %p
+          &nbsp;
+
+    .panel.panel-default
+      .panel-heading(style="padding: 10px")
+        Share it
+      .panel-body
+        .row
+          .col-lg-10
+            %input.form-control.disabled{value: quiz_url(@solution.quiz), readonly: true, style: 'cursor: text', 'select-on-click' => true}
+          .col-lg-1
+            %a.btn.btn-primary(href="https://twitter.com/share?text=I challenge you to a Ruby Quiz! #{@solution.quiz.title} - #{quiz_url(@solution.quiz)}" target='_blank')
+              %i.icon-twitter.icon-large
+
 
 .row
   .col-lg-6
@@ -37,7 +90,7 @@
             #{convert_to_ms(solution.time).to_s} ms
 
   .col-lg-6
-    %h3 Spaces Savers
+    %h3 Space-savers
 
     %table.table.table-striped
       %tr

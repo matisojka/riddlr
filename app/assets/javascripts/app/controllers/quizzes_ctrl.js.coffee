@@ -4,10 +4,11 @@ angular.module('app.controllers')
   '$scope'
   '$routeParams'
   '$window'
+  '$cookieStore'
   'Quiz'
   'Verification'
 
-($scope, $routeParams, $window, Quiz, Verification) ->
+($scope, $routeParams, $window, $cookieStore, Quiz, Verification) ->
 
   $scope.quiz_id = $routeParams.id
 
@@ -47,7 +48,8 @@ angular.module('app.controllers')
       verification_failed(failure)
 
   verification_passed = (success) ->
-    $window.location.href = success.solution.url
+    solution = success.solution
+    $window.location.href = "#{solution.url}?users_solution=true"
 
   verification_failed = (failure) ->
     result = failure.data.verification

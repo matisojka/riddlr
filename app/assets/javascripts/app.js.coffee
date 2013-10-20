@@ -5,6 +5,7 @@
 
 Riddlr = angular.module 'riddlr', [
     'ngResource'
+    'ngCookies'
     'app.controllers'
     'app.directives'
     'app.resources'
