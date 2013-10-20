@@ -32,9 +32,9 @@ module Api
 
       def http_code_for(backend_response)
         if backend_response.timeout?
-          504
+          422
         elsif backend_response.error?
-          500
+          422
         elsif !backend_response.passed?
           422
         else
