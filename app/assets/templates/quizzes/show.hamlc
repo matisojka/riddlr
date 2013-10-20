@@ -4,7 +4,7 @@
     %span(ng-show='loading_quiz')
       %i.icon-spin.icon-spinner
     %span(ng-hide='loading_quiz')
-      %i.icon-puzzle-piece
+      %i.icon-puzzle-piece(style='color: #62bd4f')
 
   %h3
     {{quiz.title}}
