@@ -1,0 +1,139 @@
+.jumbotron
+  %h1
+    Create a Ruby Quiz!
+    %i.icon-puzzle-piece
+
+/ Text input
+.row
+  .col-lg-8
+    %label{for: "title"} Title *
+    %input#title.form-control(name='title' ng-model='quiz.title' placeholder="Enumerable #map" required=true type="text")/
+    %p.help-block Choose a short, descriptive title
+
+  .col-lg-4
+    %label{for: "author"} Author
+    %input#author.form-control(name="author" ng-model='quiz.author' placeholder="John Doe" type="text")/
+    %p.help-block Add your name if you want
+
+.form-group
+  %label{for: "public_environment"} User template
+  %div#public_environment(ui-ace='editor_opts' ng-model='quiz.public_environment' style='height: 140px')
+
+%label{for: "expectations"} Expectations *
+.panel.panel-default(ng-controller='NewQuizExpectationsCtrl')
+  .panel-heading(style="padding: 10px 0 0 10px")
+    %form(name='exp_form' ng-submit='add_expectation()')
+
+      .form-group
+        .row
+          .col-lg-1
+            expect
+          .col-lg-3
+            %input.form-control.input-sm(ng-model='expectation.what' placeholder='expression' required=true)
+          .col-lg-2
+            %select.form-control.input-sm(ng-model='expectation.to_or_not_to')
+              %option(value='to') to
+              %option(value='not_to') not to
+          .col-lg-2
+            %select.form-control.input-sm(ng-model='expectation.matcher' ng-options='m for m in matchers')
+          .col-lg-2
+            %input.form-control.input-sm(ng-model='expectation.expected_value' ng-show='is_composite(expectation.matcher)' ng-required='is_composite(expectation.matcher)' placeholder='value')
+          .col-lg-1
+            %button.btn.btn-success.btn-sm(type='submit' ng-disabled='exp_form.$invalid')
+              %i.icon-plus
+              Add
+
+  .panel.body
+    %ul.unstyled
+      %li(ng-repeat='expectation in quiz.expectations')
+        %h5
+          .btn.btn-xs.btn-danger(ng-click='remove_expectation($index)' ng-show='quiz.expectations.length > 1')
+            %i.icon-trash
+          {{expectation.code}}
+
+
+#errors.panel.panel-danger(ng-show='syntax_error || resolved_expectations.length')
+  .panel-heading
+    Errors
+  .panel.body(style='padding: 10px')
+    %p.text-danger(ng-show='syntax_error')
+      {{syntax_error.message}}
+
+    %p(ng-show='resolved_expectations.length')
+      %ul.unstyled
+        %li(ng-repeat='expectation in resolved_expectations')
+          %span.text-success(ng-show='expectation.passed')
+            {{expectation.title}}
+            %i.icon-ok
+          %span.text-danger(ng-hide='expectation.passed')
+            {{expectation.title}} - {{expectation.message}}
+            %i.icon-remove
+
+/ Textarea
+.form-group
+  %label{for: "solution"}
+    %strong Valid solution *
+  %div#solution(ui-ace='editor_opts' ng-model='quiz.solution' style="height: 140px")
+
+/ Select Basic
+.form-group
+  .row
+    .col-lg-4
+      %label{for: "difficulty"} Difficulty
+      %select#difficulty.form-control(name="difficulty" ng-model='quiz.difficulty')
+        %option(value='easy') Easy
+        %option(value='intermediate') Intermediate
+        %option(value='difficult') Difficult
+        %option(value='master') Master
+
+    .col-lg-8
+      / Text input
+      %label{for: "tags"} Tags
+      %input#tags.form-control(name="tags" ng-model='quiz.tags' placeholder="enumerable, map" type="text")/
+      %p.help-block Add some tags
+
+.btn-group.pull-right
+  %button.btn.btn-lg(type='submit' ng-click='private_save()' ng-disabled='quiz_state || invalid_quiz()')
+    %i.icon-lock(ng-show='quiz_state != "saving"')
+    %i.icon-lock(ng-show='quiz_state == "saving" && !quiz.private')
+    %i.icon-spinner.icon-spin(ng-show='quiz.private && quiz_state == "saving"')
+    Make private
+
+  %button.btn.btn-lg.btn-warning(type='submit' ng-click='save()' ng-disabled='quiz_state || invalid_quiz()')
+    %i.icon-group(ng-show='quiz_state != "saving"')
+    %i.icon-group(ng-show='quiz_state == "saving" && quiz.private')
+    %i.icon-spinner.icon-spin(ng-show='!quiz.private && quiz_state == "saving"')
+    Make public
+
+
+.clearfix
+
+#success-modal.modal.fade
+  .modal-dialog
+    .modal-content
+
+      .modal-header
+        %h4.modal-title.text-success
+          %i.icon-check
+          Success! Your quiz has been created!
+
+      .modal-body
+        %h5
+          Copy the quiz link and send it to your friends
+
+        .row
+          .col-lg-10
+            %input.form-control.disabled(ng-model='quiz.url' readonly=true style='cursor: text' select-on-click=true)
+
+          .col-lg-1
+            %a.btn.btn-primary(href='https://twitter.com/share?text=I challenge you to a Ruby Quiz! {{quiz.title}} - {{quiz.url}}' target='_blank')
+              %i.icon-twitter.icon-large
+
+      .modal-footer
+        %a.btn.btn-warning(href='{{quiz.url}}')
+          Go to the quiz
+
+    / /.modal-content
+  / /.modal-dialog
+/ /.modal
+

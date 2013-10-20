@@ -5,7 +5,7 @@ Riddlr::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'homepage#show'
 
-  resources :quizzes, only: %i(show)
+  resources :quizzes, only: %i(new show)
   resources :solutions, only: %i(show)
 
   namespace :api do

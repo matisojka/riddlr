@@ -12,6 +12,7 @@ angular.module('app.controllers')
     difficulty: 'easy'
     title: 'Sum of two integers'
     goal: 'Write a method that sums two integers'
+    expectations: []
 
   $scope.invalid_quiz = ->
     $scope.quiz.expectations.length == 0 or

@@ -29,13 +29,13 @@ Riddlr.config [
   $locationProvider.html5Mode(true).hashPrefix('!')
 
   $routeProvider.
+    when('/quizzes/new'
+      template: JST['quizzes/new']()
+      controller: 'NewQuizCtrl'
+    ).
     when('/quizzes/:id'
       template: JST['quizzes/show']()
       controller: 'QuizzesCtrl'
-    ).
-    when('/'
-      template: JST['homepage/show']()
-      controller: 'HomepageCtrl'
     ).
     otherwise
       redirectTo: '/'
