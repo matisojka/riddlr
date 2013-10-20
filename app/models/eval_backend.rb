@@ -113,7 +113,16 @@ class EvalBackend
 
   def start_backend
     backend_dir = Rails.root.join('evaluator')
-    system("cd #{backend_dir} && bash -c \"jruby -S bundle exec jruby server.rb &\"")
+    Bundler.with_clean_env do
+      Dir.chdir(backend_dir) do
+        env = {
+          "GEM_PATH" => "/home/www-data/jruby/lib/ruby/gems/shared:/home/www-data/.gem/jruby/1.9",
+          "GEM_HOME" => "/home/www-data/jruby/lib/ruby/gems/shared"
+        }
+
+        system(env, "jruby -S bundle exec jruby server.rb &")
+      end
+    end
 
     raise NotAvailable.new("Evaluator not Available. Please try again later.")
   end
