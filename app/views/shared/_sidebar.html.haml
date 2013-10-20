@@ -1,0 +1,29 @@
+#quiz_lists
+  = image_tag('riddlr.png')
+  %blockquote
+    Riddle me this
+    %small The Riddlr
+
+  .well.sidebar-nav
+    %ul.nav.nav-tabs
+      %li.active
+        %a(href="#latest" data-toggle="tab") Latest
+      %li
+        %a(href="#popular" data-toggle="tab") Popular
+
+      %li.disabled
+        %a Hard
+
+    .tab-content
+      .tab-pane.active#latest
+        .list-group
+          - Quiz.latest.each do |quiz|
+            = link_to quiz.title, quiz, class: 'list-group-item'
+
+      .tab-pane#popular
+        %ul.list-group
+          - Quiz.popular.each do |quiz|
+            = link_to quiz, class: 'list-group-item' do
+              = quiz.title
+              %span.badge.float-right
+                = quiz.solutions.count

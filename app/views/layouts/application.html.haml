@@ -25,27 +25,7 @@
         .col-xs-12.col-sm-9(ng-view=true)
           = yield
         #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{role: "navigation"}
-          .well.sidebar-nav
-            %ul.nav
-              %li Sidebar
-              %li.active
-                %a{href: "#"} Link
-              %li
-                %a{href: "#"} Link
-              %li
-                %a{href: "#"} Link
-              %li Sidebar
-              %li
-                %a{href: "#"} Link
-              %li
-                %a{href: "#"} Link
-              %li
-                %a{href: "#"} Link
-              %li Sidebar
-              %li
-                %a{href: "#"} Link
-              %li
-                %a{href: "#"} Link
+          = render 'shared/sidebar'
           / /.well
         / /span
       / /row

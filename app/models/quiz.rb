@@ -6,6 +6,17 @@ class Quiz < ActiveRecord::Base
   before_validation :generate_permalink
   after_initialize :wrap_expectations
 
+  has_many :solutions
+
+  scope :latest, -> { order('created_at DESC') }
+
+  scope :popular, -> {
+    joins(:solutions)
+      .select('quizzes.*, count(solutions.id) as solutions_count')
+      .group('quizzes.id')
+      .order('solutions_count DESC')
+  }
+
   def to_param
     self.permalink
   end
