@@ -52,10 +52,17 @@
           {{expectation.code}}
 
 
-#errors.panel.panel-danger(ng-show='syntax_error || resolved_expectations.length')
+#errors.panel.panel-danger(ng-show='error || syntax_error || resolved_expectations.length')
   .panel-heading
     Errors
-  .panel.body(style='padding: 10px')
+  .panel-body.text-danger(style='padding: 10px')
+    %p(ng-show='error == "backend"')
+      It seems that Joker shut down our Riddlr backend... Please try again in a minute.
+    %p(ng-show='error == "timeout"')
+      Huhu this riddle seems to be really tough... Or maybe even impossible? Your solution seems to last too long, try making it more efficient.
+    %p(ng-show='error == "unknown"')
+      There is chaos in Gotham again. We're sorry, buy some errors escaped the prison and we have to chase them down. Maybe you just got one?
+
     %p.text-danger(ng-show='syntax_error')
       {{syntax_error.message}}
 

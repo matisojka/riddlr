@@ -56,12 +56,24 @@ angular.module('app.controllers')
       keyboard: false
 
   $scope.quiz_not_saved = (failure) ->
-    syntax_error = failure.data.quiz
+    result = failure.data.quiz
 
-    if syntax_error.error
-      $scope.syntax_error = syntax_error
-    else
-      $scope.resolved_expectations = failure.data.quiz.expectations
+    if result
+      if result.expectations
+        $scope.resolved_expectations = result.expectations
+        return
+      if result.error
+        $scope.syntax_error = result
+
+    if failure.status is 504
+      $scope.error = 'backend'
+      return
+
+    if failure.status is 422
+      if result.timeout
+        $scope.error = 'timeout'
+      else
+        $scope.error = 'unknown' unless $scope.syntax_error
 
   $scope.go_to_quiz_url = (quiz) ->
     $window.location.href = quiz.url

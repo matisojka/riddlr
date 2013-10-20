@@ -54,12 +54,22 @@ angular.module('app.controllers')
   verification_failed = (failure) ->
     result = failure.data.verification
 
-    if result and result.error
-      $scope.syntax_error = result
-    else
-      if failure.status is 504
-        $scope.error = 'backend'
-      else
+    if result
+      if result.expectations
         $scope.resolved_expectations = result.expectations
+        return
+      if result.error
+        $scope.syntax_error = result
+
+    if failure.status is 504
+      $scope.error = 'backend'
+      return
+
+    if failure.status is 422
+      if result.timeout
+        $scope.error = 'timeout'
+      else
+        $scope.error = 'unknown' unless $scope.syntax_error
+
 ]
 
