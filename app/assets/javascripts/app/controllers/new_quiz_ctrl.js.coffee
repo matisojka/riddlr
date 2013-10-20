@@ -14,6 +14,9 @@ angular.module('app.controllers')
     goal: 'Write a method that sums two integers'
     expectations: []
 
+  $scope.editor_opts =
+    mode: 'ruby'
+
   $scope.invalid_quiz = ->
     $scope.quiz.expectations.length == 0 or
       !$scope.quiz.title or

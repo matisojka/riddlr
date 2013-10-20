@@ -1,2 +1,59 @@
-quizzes
+.jumbotron
+  %h1
+    Solve the quiz
+    %span(ng-show='loading_quiz')
+      %i.icon-spin.icon-spinner
+    %span(ng-hide='loading_quiz')
+      %i.icon-puzzle-piece
+
+  %h3
+    {{quiz.title}}
+
+    %span(ng-show='quiz.author')
+      by {{quiz.author}}
+
+%form(name='form')
+
+  %fieldset
+
+    .form-group
+      %label{for: "user"} Your name
+      %input#user.form-control(name="user" ng-model='quiz.user' placeholder="John Doe" type="text")/
+      %p.help-block As people will see you in the solution list
+
+    .form-group
+      %label{for: "public_environment"} Your solution
+      %div#public_environment(ui-ace='editor_opts' ng-model='quiz.public_environment' style='height: 260px')
+      %p.help-block
+        %i.icon-info
+        Read the description of the quiz and try to understand it. Then, provide a valid solution.
+      %p.help-block
+        If your code passes all expectations, victory!
+
+    #errors.panel.panel-danger(ng-show='syntax_error || resolved_expectations.length')
+      .panel-heading
+        Errors
+      .panel.body(style='padding: 10px')
+        %p(ng-show='syntax_error')
+          %ul.unstyled
+            %li
+              %span.text-danger
+                {{syntax_error.message}}
+
+        %p(ng-show='resolved_expectations.length')
+          %ul.unstyled
+            %li(ng-repeat='expectation in resolved_expectations')
+              %span.text-success(ng-show='expectation.passed')
+                {{expectation.title}}
+                %i.icon-ok
+              %span.text-danger(ng-hide='expectation.passed')
+                {{expectation.title}} - {{expectation.message}}
+                %i.icon-remove
+
+    .pull-right
+      %button.btn.btn-lg.btn-warning(type='submit' ng-click='check_solution()' ng-disabled='checking_solution || !quiz.public_environment')
+        %i.icon-rocket(ng-hide='checking_solution')
+        %i.icon-spinner.icon-spin(ng-show='checking_solution')
+        Solve
+    .clearfix
 

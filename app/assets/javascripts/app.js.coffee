@@ -1,7 +1,7 @@
 #= require_self
-#= require_tree ./directives/
-#= require_tree ./controllers/
-#= require_tree ./resources/
+#= require_tree ./app/directives/
+#= require_tree ./app/controllers/
+#= require_tree ./app/resources/
 
 Riddlr = angular.module 'riddlr', [
     'ngResource'

@@ -15,7 +15,7 @@
 //= require twitter/bootstrap
 //= require angular
 //= require angular-resource
-//= require_tree ./app
+//= require app
 //= require_tree ../templates
 //= require ui-ace-editor
 
