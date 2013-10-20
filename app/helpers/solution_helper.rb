@@ -12,6 +12,24 @@ module SolutionHelper
   end
 
   def display_author(author)
-    author || "Anonymous"
+    author.presence || na_na_na_na_na_batman.sample
+  end
+
+  private
+
+  def na_na_na_na_na_batman
+    [
+      "Batman",
+      "Catwoman",
+      "Bane",
+      "Harley Quinn",
+      "Professor Hugo Strange",
+      "The Joker",
+      "Killer Croc",
+      "Mr. Freeze",
+      "The Penguin",
+      "Scarecrow",
+      "Two Face"
+    ]
   end
 end

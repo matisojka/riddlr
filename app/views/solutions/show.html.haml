@@ -48,12 +48,12 @@
           = link_to 'Solve it!', quiz_path(@solution.quiz), class: 'btn btn-primary btn-lg'
       %h4
         by
-        = @solution.quiz.author || 'Anonymous'
+        = display_author(@solution.quiz.author)
 
     %div(style='margin: 10px;')
       %h3
         Solved by
-        = "#{@solution.author || 'Anonymous'},"
+        = display_author(@solution.author)
         = time_ago_in_words(@solution.created_at)
         ago
 
