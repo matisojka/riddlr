@@ -13,6 +13,14 @@ angular.module('app.controllers')
     title: 'Sum of two integers'
     goal: 'Write a method that sums two integers'
     expectations: []
+    tags: {tags: []}
+
+  $scope.$watch 'raw_tags', (tags) ->
+    if tags
+      split_tags = tags.split(',')
+
+      $scope.quiz.tags =
+        tags: split_tags
 
   $scope.editor_opts =
     mode: 'ruby'

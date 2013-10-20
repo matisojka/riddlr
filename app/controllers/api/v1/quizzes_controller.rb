@@ -74,7 +74,8 @@ module Api
           :tags,
           :author,
           :private,
-          {expectations: [:title, :code] }
+          {expectations: [:title, :code] },
+          {tags: { tags: []}}
         )
       end
     end

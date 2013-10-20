@@ -89,7 +89,7 @@
     .col-lg-8
       / Text input
       %label{for: "tags"} Tags
-      %input#tags.form-control(name="tags" ng-model='quiz.tags' placeholder="enumerable, map" type="text")/
+      %input#tags.form-control(name="tags" ng-model='raw_tags' placeholder="enumerable, map" type="text")/
       %p.help-block Add some tags
 
 .btn-group.pull-right
