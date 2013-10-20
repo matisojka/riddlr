@@ -1,10 +1,14 @@
 class EvalBackend
+  class NotAvailable < StandardError
+  end
+
   class Response
     attr_reader :response, :expectations
 
     def initialize(response, expectations)
       @response = response
       @expectations = expectations
+
 
       check_timeout || check_error || check_expectations
     end
@@ -69,6 +73,8 @@ class EvalBackend
   end
 
   def eval(environment, user_code, expectations)
+    check_backend
+
     json_content = {
       code: [environment, user_code].join("\n"),
       expectations: convert_expectations(expectations)
@@ -90,5 +96,25 @@ class EvalBackend
     expectations.map do |expectation|
       {title: expectation.title, code: expectation.code}
     end
+  end
+
+  def check_backend
+    pid_file = Rails.root.join('tmp/pids/evaluator.pid')
+    begin
+      if File.exist?(pid_file)
+        Process.kill(0, File.read(pid_file).to_i)
+      else
+        start_backend
+      end
+    rescue Errno::ESRCH
+      start_backend
+    end
+  end
+
+  def start_backend
+    backend_dir = Rails.root.join('evaluator')
+    system("cd #{backend_dir} && bash -c \"jruby -S bundle exec jruby server.rb &\"")
+
+    raise NotAvailable.new("Evaluator not Available. Please try again later.")
   end
 end
