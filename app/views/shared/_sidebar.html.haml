@@ -11,19 +11,24 @@
       %li
         %a(href="#popular" data-toggle="tab") Popular
 
-      %li.disabled
-        %a Hard
+      %li
+        %a(href="#random" data-toggle="tab") Rand()
 
     .tab-content
       .tab-pane.active#latest
         .list-group
-          - Quiz.latest.each do |quiz|
+          - Quiz.latest.limit(10).each do |quiz|
             = link_to quiz.title, quiz, class: 'list-group-item'
 
       .tab-pane#popular
-        %ul.list-group
-          - Quiz.popular.each do |quiz|
+        .list-group
+          - Quiz.popular.limit(10).each do |quiz|
             = link_to quiz, class: 'list-group-item' do
               = quiz.title
               %span.badge.float-right
                 = quiz.solutions.count
+
+      .tab-pane#random
+        .list-group
+          - Quiz.random.limit(10).each do |quiz|
+            = link_to quiz.title, quiz, class: 'list-group-item'

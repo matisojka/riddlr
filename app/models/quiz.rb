@@ -8,14 +8,19 @@ class Quiz < ActiveRecord::Base
 
   has_many :solutions
 
-  scope :latest, -> { order('created_at DESC') }
+  scope :public, -> { where(private: nil) }
+
+  scope :latest, -> { public.order('created_at DESC') }
 
   scope :popular, -> {
-    joins(:solutions)
+    public
+      .joins(:solutions)
       .select('quizzes.*, count(solutions.id) as solutions_count')
       .group('quizzes.id')
       .order('solutions_count DESC')
   }
+
+  scope :random, -> { public.order("RANDOM()") }
 
   def to_param
     self.permalink
