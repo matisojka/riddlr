@@ -21,7 +21,6 @@ gem 'jquery-rails'
 gem 'angularjs-rails'
 gem 'haml_coffee_assets'
 gem 'execjs'
-gem 'angular-ui-bootstrap-rails'
 
 gem 'active_model_serializers'
 
