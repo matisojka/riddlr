@@ -2,9 +2,10 @@ angular.module('app.controllers')
 
 .controller 'NewQuizCtrl', [
   '$scope'
+  '$window'
   'Quiz'
 
-($scope, Quiz) ->
+($scope, $window, Quiz) ->
 
   $scope.quiz =
     solution: "def sum(a, b)\n  a + b\nend"
@@ -64,6 +65,9 @@ angular.module('app.controllers')
       $scope.syntax_error = syntax_error
     else
       $scope.resolved_expectations = failure.data.quiz.expectations
+
+  $scope.go_to_quiz_url = (quiz) ->
+    $window.location.href = quiz.url
 
 ]
 

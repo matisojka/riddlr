@@ -130,7 +130,7 @@
               %i.icon-twitter.icon-large
 
       .modal-footer
-        %a.btn.btn-warning(href='{{quiz.url}}')
+        %a.btn.btn-warning(ng-click='go_to_quiz_url(quiz)')
           Go to the quiz
 
     / /.modal-content
