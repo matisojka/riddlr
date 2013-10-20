@@ -119,8 +119,9 @@ class EvalBackend
           "GEM_PATH" => "/home/www-data/jruby/lib/ruby/gems/shared:/home/www-data/.gem/jruby/1.9",
           "GEM_HOME" => "/home/www-data/jruby/lib/ruby/gems/shared"
         }
+        out = ['tmp/log/restart_sinatra.log', 'w']
 
-        system(env, "jruby -S bundle exec jruby server.rb &")
+        system(env, "jruby -S bundle exec jruby server.rb &", out: out)
       end
     end
 
