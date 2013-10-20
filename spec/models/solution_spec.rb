@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Solution do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'should include shit' do
+    expect(['shit']).to include('shit')
+  end
 end

@@ -1,0 +1,53 @@
+%span
+  .well
+    %h1
+      = link_to @quiz.title, quiz_path(@quiz)
+      .pull-right
+        = link_to 'Solve it!', quiz_path(@quiz), class: 'btn btn-primary btn-lg'
+    %h4
+      by
+      = display_author(@quiz)
+%h3
+  People who solved this quiz
+
+%table.table.table-striped
+  %tr
+    %th
+      Author
+  - @quiz.solutions.limit(100).each do |solution|
+    %tr
+      %td
+        = link_to display_author(solution), solution_path(solution)
+
+.row
+  .col-lg-6
+    %h3 The fastest are ...
+
+    %table.table.table-striped
+      %tr
+        %th
+          Author
+        %th
+          Runtime
+      - Solution.fastest_for(@quiz).each do |solution|
+        %tr
+          %td
+            = link_to display_author(solution), solution_path(solution)
+          %td
+            #{convert_to_ms(solution.time).to_s}
+
+  .col-lg-6
+    %h3 Space-savers
+
+    %table.table.table-striped
+      %tr
+        %th
+          Author
+        %th
+          Amount of Characters
+      - Solution.smallest_for(@quiz).each do |solution|
+        %tr
+          %td
+            = link_to display_author(solution), solution_path(solution)
+          %td
+            = solution.code_length

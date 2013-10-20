@@ -6,7 +6,11 @@ Riddlr::Application.routes.draw do
   root 'homepage#show'
 
   get 'quizzes/random' => 'quizzes#random', as: :random_quiz
-  resources :quizzes, only: %i(new show)
+  resources :quizzes, only: %i(new show) do
+    member do
+      get :solutions
+    end
+  end
 
   resources :solutions, only: %i(show)
 
