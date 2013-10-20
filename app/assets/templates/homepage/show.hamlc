@@ -1,4 +1,3 @@
-
 .row(ng-controller='NewQuizCtrl')
   .jumbotron
     %h1
@@ -23,7 +22,7 @@
     %div#public_environment(ui-ace='editor_opts' ng-model='quiz.public_environment' style='height: 140px')
 
   %label{for: "expectations"} Expectations *
-  .panel.panel-primary(ng-controller='NewQuizExpectationsCtrl')
+  .panel.panel-default(ng-controller='NewQuizExpectationsCtrl')
     .panel-heading(style="padding: 10px 0 0 10px")
       %form(name='exp_form' ng-submit='add_expectation()')
 
