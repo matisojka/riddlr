@@ -34,12 +34,40 @@
         / /span
       / /row
       %hr/
-      %footer
+
+      %footer(ng-controller='FooterCtrl')
         %p
-          Build with love & club mate by cedrics && yagooar
+          Build with love & club mate by
+
+          %a(ng-click='open()' style='cursor: pointer')
+            cedrics && yagooar
           %a(href='http://railsrumble.com' target='_blank')
             @railsrumble2013
-    / /.container
+
+        #team-modal.modal.fade(style='margin-top: 40px')
+          .modal-dialog
+            .modal-content
+
+              .modal-header
+                %h4.modal-title.text-success
+                  %i.icon-check
+                  The Riddlrs!
+
+              .modal-body
+                %p
+                  After spending the whole week planning, discussing, programming, designing, laughing, screaming and having a great time - here it is - our Rails Rumble Riddlr App!
+                %p We hope you have as much fun as we had developing it!
+
+                = image_tag asset_path('the_team.png')
+
+              .modal-footer
+                %a.btn.btn-warning(data-dismiss='modal')
+                  OK, cool!
+
+              / /.modal-content
+            / /.modal-dialog
+          / /.modal
+
 
     /
       Javascripts
