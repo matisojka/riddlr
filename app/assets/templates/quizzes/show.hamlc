@@ -30,10 +30,13 @@
       %p.help-block
         If your code passes all expectations, victory!
 
-    #errors.panel.panel-danger(ng-show='syntax_error || resolved_expectations.length')
+    #errors.panel.panel-danger(ng-show='error || syntax_error || resolved_expectations.length')
       .panel-heading
         Errors
-      .panel.body(style='padding: 10px')
+      .panel.body.text-danger(style='padding: 10px')
+        %p(ng-show='error')
+          It seems that Joker shut down our Riddlr backend... Please try again in a minute.
+
         %p(ng-show='syntax_error')
           %ul.unstyled
             %li
