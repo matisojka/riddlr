@@ -1,5 +1,5 @@
 class Quiz < ActiveRecord::Base
-  validates :title, :goal, :expectations, :solution, presence: true
+  validates :title, :expectations, :solution, presence: true
 
   validates_uniqueness_of :permalink
 
