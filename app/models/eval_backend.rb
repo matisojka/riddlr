@@ -112,18 +112,22 @@ class EvalBackend
   end
 
   def start_backend
-    backend_dir = Rails.root.join('evaluator')
-    Bundler.with_clean_env do
-      Dir.chdir(backend_dir) do
-        env = {
-          "GEM_PATH" => "/home/www-data/jruby/lib/ruby/gems/shared:/home/www-data/.gem/jruby/1.9",
-          "GEM_HOME" => "/home/www-data/jruby/lib/ruby/gems/shared"
-        }
-        log = ['log/restart_sinatra.log', 'a']
+    Rails.cache.fetch('backend_lock', expires_in: 1.minute) do
+      backend_dir = Rails.root.join('evaluator')
+      Bundler.with_clean_env do
+        Dir.chdir(backend_dir) do
+          env = {
+            "GEM_PATH" => "/home/www-data/jruby/lib/ruby/gems/shared:/home/www-data/.gem/jruby/1.9",
+            "GEM_HOME" => "/home/www-data/jruby/lib/ruby/gems/shared"
+          }
+          log = ['log/restart_sinatra.log', 'a']
 
-        system(env,
-               "/home/www-data/jruby/bin/jruby -S bundle exec /home/www-data/jruby/bin/jruby server.rb &")
+          system(env,
+                 "/home/www-data/jruby/bin/jruby -S bundle exec /home/www-data/jruby/bin/jruby server.rb &")
+        end
       end
+
+      true
     end
 
     raise NotAvailable.new("Evaluator not Available. Please try again later.")
