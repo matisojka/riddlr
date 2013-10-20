@@ -11,25 +11,8 @@ module SolutionHelper
     value == 0 ? 'too fast to measure!' : value
   end
 
-  def display_author(author)
-    author.presence || na_na_na_na_na_batman.sample
+  def display_author(obj)
+    obj.author.presence || na_na_cache(obj)
   end
 
-  private
-
-  def na_na_na_na_na_batman
-    [
-      "Batman",
-      "Catwoman",
-      "Bane",
-      "Harley Quinn",
-      "Professor Hugo Strange",
-      "The Joker",
-      "Killer Croc",
-      "Mr. Freeze",
-      "The Penguin",
-      "Scarecrow",
-      "Two Face"
-    ]
-  end
 end

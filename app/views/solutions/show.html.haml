@@ -48,12 +48,12 @@
           = link_to 'Solve it!', quiz_path(@solution.quiz), class: 'btn btn-primary btn-lg'
       %h4
         by
-        = display_author(@solution.quiz.author)
+        = display_author(@solution.quiz)
 
     %div(style='margin: 10px;')
       %h3
         Solved by
-        = display_author(@solution.author)
+        = display_author(@solution)
         = time_ago_in_words(@solution.created_at)
         ago
 
@@ -104,7 +104,7 @@
       - Solution.fastest_for(@solution.quiz).each do |solution|
         %tr{ class: solution.id == @solution.id && 'warning' }
           %td
-            = link_to display_author(solution.author), solution_path(solution)
+            = link_to display_author(solution), solution_path(solution)
           %td
             #{convert_to_ms(solution.time).to_s}
 
@@ -120,7 +120,7 @@
       - Solution.smallest_for(@solution.quiz).each do |solution|
         %tr{ class: solution.id == @solution.id && 'warning' }
           %td
-            = link_to display_author(solution.author), solution_path(solution)
+            = link_to display_author(solution), solution_path(solution)
           %td
             = solution.code_length
 
