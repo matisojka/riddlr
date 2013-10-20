@@ -1,6 +1,7 @@
-#quiz_lists
-  = link_to random_quiz_path do
+#quiz_lists(ng-controller='QuizzesCtrl')
+  %a(ng-click='random()' style='cursor: pointer')
     = image_tag('riddlr.png')
+
   %blockquote
     Riddle me this
     %small The Riddlr

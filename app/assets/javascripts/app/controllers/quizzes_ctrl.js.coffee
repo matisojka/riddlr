@@ -4,11 +4,10 @@ angular.module('app.controllers')
   '$scope'
   '$routeParams'
   '$window'
-  '$cookieStore'
   'Quiz'
   'Verification'
 
-($scope, $routeParams, $window, $cookieStore, Quiz, Verification) ->
+($scope, $routeParams, $window, Quiz, Verification) ->
 
   $scope.quiz_id = $routeParams.id
 

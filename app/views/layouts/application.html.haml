@@ -1,5 +1,5 @@
 !!! 5
-%html{lang: "en", 'ng-app' => angular? ? 'riddlr' : nil }
+%html{lang: "en", 'ng-app' => 'riddlr'}
   %head
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
@@ -17,14 +17,13 @@
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
 
-
   %body
     %script(src="http://s0.railsrumble.com/banner.js" type="text/javascript")
 
     .container(style='margin-top: 20px')
 
       .row.row-offcanvas.row-offcanvas-right
-        #content.col-xs-12.col-sm-9(ng-view=true)
+        #content.col-xs-12.col-sm-9{'ng-view' => angular? ? 'riddlr' : nil}
           = yield
 
         #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{role: "navigation"}
@@ -35,7 +34,7 @@
       / /row
       %hr/
 
-      %footer(ng-app='riddlr' ng-controller='FooterCtrl')
+      %footer(ng-controller='FooterCtrl')
         %p
           Build with love & club mate by
 
