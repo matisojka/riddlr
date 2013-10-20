@@ -9,7 +9,7 @@ angular.module('app.controllers')
 
   $scope.quiz =
     solution: "# Provide a valid solution so that we know you're not kidding!\n\ndef sum(a, b)\n  a + b\nend"
-    public_environment: "# Put a description here for the solvers of your quiz.\n# Explain the goals and what you expect.\n\n def sum(a, b)\n  # user code here\nend"
+    public_environment: "# Put a description here for the solvers of your quiz.\n# Explain the goals and what you expect.\n# Sadly, some Ruby features (like creating classes) are disabled for now. We're working on it!\n\ndef sum(a, b)\n  # user code here\nend"
     difficulty: 'easy'
     expectations: []
     tags: {tags: []}
