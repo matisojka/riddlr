@@ -1,18 +1,18 @@
 .jumbotron
   %h1
     Create a Ruby Quiz!
-    %i.icon-puzzle-piece
+    %i.icon-puzzle-piece(style='color: #62bd4f')
 
 / Text input
 .row
   .col-lg-8
     %label{for: "title"} Title *
-    %input#title.form-control(name='title' ng-model='quiz.title' placeholder="Enumerable #map" required=true type="text")/
+    %input#title.form-control(name='title' ng-model='quiz.title' placeholder="Enumerable #map" required=true type="text" maxlength='80')/
     %p.help-block Choose a short, descriptive title
 
   .col-lg-4
     %label{for: "author"} Author
-    %input#author.form-control(name="author" ng-model='quiz.author' placeholder="John Doe" type="text")/
+    %input#author.form-control(name="author" ng-model='quiz.author' placeholder="John Doe" type="text" maxlength='20')/
     %p.help-block Add your name if you want
 
 .form-group
@@ -89,7 +89,7 @@
     .col-lg-8
       / Text input
       %label{for: "tags"} Tags
-      %input#tags.form-control(name="tags" ng-model='raw_tags' placeholder="enumerable, map" type="text")/
+      %input#tags.form-control(name="tags" ng-model='raw_tags' placeholder="enumerable, map" type="text" maxlength='200')/
       %p.help-block Add some tags
 
 .btn-group.pull-right
