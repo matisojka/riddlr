@@ -5,14 +5,15 @@
     %small The Riddlr
 
   .well.sidebar-nav
-    %ul.nav.nav-tabs
+    %ul.nav.nav-tabs(style='cursor: pointer')
       %li.active
-        %a(href="#latest" data-toggle="tab") Latest
-      %li
-        %a(href="#popular" data-toggle="tab") Popular
+        %a(data-target="#latest" data-toggle="tab") Latest
 
       %li
-        %a(href="#random" data-toggle="tab") Rand()
+        %a(data-target="#popular" data-toggle="tab") Popular
+
+      %li
+        %a(data-target="#random" data-toggle="tab") Rand()
 
     .tab-content
       .tab-pane.active#latest
